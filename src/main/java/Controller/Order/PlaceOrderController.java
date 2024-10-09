@@ -1,10 +1,9 @@
-package Controller;
+package Controller.Order;
 
 import Controller.Customer.CustomerController;
 import Controller.Item.ItemController;
-import Model.CartTm;
-import Model.Customer;
-import Model.Item;
+import DB.DBConnection;
+import Model.*;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
@@ -14,8 +13,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,8 +22,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -111,6 +113,29 @@ public class PlaceOrderController implements Initializable {
 
     @FXML
     void btnPlaceOrderOnAction(ActionEvent event) {
+        String orderID = txtCustomerID.getText();
+        String customerId = cmbCustomerId.getValue();
+        //String orderDate = lblOrderDate.getText();
+
+        LocalDate now = LocalDate.now();
+        ArrayList<OrderDetail>orderDetails = new ArrayList<>();
+
+        for (CartTm cartTm : cart){
+            String itemCode = cartTm.getItemCode();
+            Integer qty = cartTm.getQty();
+            orderDetails.add(new OrderDetail(orderID,itemCode,qty,0.0));
+        }
+
+        try {
+            if(new OrderController().placeOrder(new Order(orderID,now,customerId,orderDetails))) {
+                new Alert(Alert.AlertType.INFORMATION, "Order Placed...").show();
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Order Not Placed...").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
     }
 
@@ -185,6 +210,9 @@ public class PlaceOrderController implements Initializable {
         }
         lblNetTotal.setText(total.toString());
 
+    }
+    public void btnCommitOnAction(ActionEvent actionEvent) throws SQLException {
+        DBConnection.getInstance().getConnection().commit();
     }
 
 }

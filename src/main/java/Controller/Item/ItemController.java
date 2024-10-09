@@ -1,11 +1,13 @@
 package Controller.Item;
 
 import Model.Item;
+import Model.OrderDetail;
 import Util.CRUDUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class ItemController implements ItemService{
 
@@ -103,5 +105,26 @@ public class ItemController implements ItemService{
             itemCodeList.add(item.getItemCode());
         });
         return itemCodeList;
+    }
+
+    public boolean updateStock(List<OrderDetail> orderDetails) {
+        for (OrderDetail orderDetail : orderDetails){
+            try {
+                if (!updateStock(orderDetail)){
+                    return false;
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return true;
+
+    }
+
+    public boolean updateStock(OrderDetail orderDetails) throws SQLException {
+        return CRUDUtil.execute("UPDATE Item set QtyOnHand=QtyOnHand-? WHERE ItemCode=?",
+                orderDetails.getQty(),
+                orderDetails.getItemCode()
+        );
     }
 }
