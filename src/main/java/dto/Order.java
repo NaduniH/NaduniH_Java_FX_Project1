@@ -1,4 +1,4 @@
-package Model;
+package dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Order {
     private  String orderID;
     private LocalDate orderDate;

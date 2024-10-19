@@ -1,6 +1,6 @@
 package Controller.Order;
 
-import Model.OrderDetail;
+import dto.OrderDetail;
 import Util.CRUDUtil;
 
 import java.sql.SQLException;

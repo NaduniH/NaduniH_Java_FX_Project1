@@ -1,34 +1,18 @@
 package Controller.Customer;
 
-import Model.Customer;
+import dto.Customer;
 import Util.CRUDUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerController implements CustomerService {
+public class CustomerController1 implements CustomerService1 {
 
 
     @Override
     public boolean addCustomer(Customer customer) {
-        String SQL =  "INSERT INTO Customer VALUES(?,?,?,?,?,?,?,?,?)";
-        try {
-            return CRUDUtil.execute(
-                    SQL,
-                    customer.getId(),
-                    customer.getTitle(),
-                    customer.getName(),
-                    customer.getDob(),
-                    customer.getSalary(),
-                    customer.getAddress(),
-                    customer.getCity(),
-                    customer.getProvince(),
-                    customer.getPostalCode()
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return false;
     }
 
     @Override

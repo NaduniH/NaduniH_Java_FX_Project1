@@ -1,8 +1,8 @@
 package Controller.Order;
 
-import Controller.Item.ItemController;
+import Controller.Item.ItemController1;
 import DB.DBConnection;
-import Model.Order;
+import dto.Order;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +23,7 @@ public class OrderController {
             boolean isOrderDetailAdd = OrderDetailController.addOrderDetail(order.getOrderDetails());
 
             if (isOrderDetailAdd) {
-                boolean isUpdateStock = new ItemController().updateStock(order.getOrderDetails());
+                boolean isUpdateStock = new ItemController1().updateStock(order.getOrderDetails());
 
                 if (isUpdateStock) {
                     connection.commit();

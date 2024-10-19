@@ -1,9 +1,9 @@
 package Controller.Order;
 
-import Controller.Customer.CustomerController;
-import Controller.Item.ItemController;
+import Controller.Customer.CustomerController1;
+import Controller.Item.ItemController1;
 import DB.DBConnection;
-import Model.*;
+import dto.*;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
@@ -178,15 +178,15 @@ public class PlaceOrderController implements Initializable {
     }
 
     private void loadCustomerIds(){
-        cmbCustomerId.setItems(new CustomerController().getCustomerIds());
+        cmbCustomerId.setItems(new CustomerController1().getCustomerIds());
     }
 
     private void loadItemCodes(){
-        cmbItemCode.setItems(new ItemController().getItemCodes());
+        cmbItemCode.setItems(new ItemController1().getItemCodes());
     }
 
     public  void loadItemData(String itemCode){
-        Item item = new ItemController().searchItem(itemCode);
+        Item item = new ItemController1().searchItem(itemCode);
 
         txtItemDescription.setText(item.getDescription());
         txtStock.setText(item.getQty().toString());
@@ -194,7 +194,7 @@ public class PlaceOrderController implements Initializable {
     }
 
     public  void loadCustomerData(String customerID){
-        Customer customer = new CustomerController().searchCustomer(customerID);
+        Customer customer = new CustomerController1().searchCustomer(customerID);
 
         txtName.setText(customer.getName());
         txtCity.setText(customer.getCity());

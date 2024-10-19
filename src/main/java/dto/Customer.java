@@ -1,4 +1,4 @@
-package Model;
+package dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Customer {
     private String id;
     private String title;

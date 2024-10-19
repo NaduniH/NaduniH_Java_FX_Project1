@@ -1,6 +1,7 @@
 package Controller.Item;
 
-import Model.Item;
+import Util.ServiceType;
+import dto.Item;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import service.ServiceFactory;
+import service.custom.ItemService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,7 +56,7 @@ public class ItemFormController implements Initializable {
     @FXML
     private JFXTextField txtUnitPrice;
 
-    ItemService ItemController = new ItemController();
+    ItemService1 ItemController = new ItemController1();
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
@@ -64,13 +67,13 @@ public class ItemFormController implements Initializable {
                 Double.parseDouble(txtUnitPrice.getText()),
                 Integer.parseInt(txtQty.getText())
         );
-        boolean isAdded = ItemController.addItem(item);
-        if(isAdded){
-            new Alert(Alert.AlertType.INFORMATION,"Item Added Successfully!!").show();
+
+        ItemService itemService = ServiceFactory.getInstance().getServiceType(ServiceType.ITEM);
+        if (itemService.addItem(item)) {
+            new Alert(Alert.AlertType.INFORMATION, "Item Added...").show();
             loadTable();
-            //clearText();
         } else {
-            new Alert(Alert.AlertType.ERROR,"Item Not Added!!").show();
+            new Alert(Alert.AlertType.ERROR, "Item Not Added...").show();
         }
     }
 

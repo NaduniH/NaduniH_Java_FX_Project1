@@ -1,6 +1,7 @@
 package Controller.Customer;
 
-import Model.Customer;
+import dto.Customer;
+import Util.ServiceType;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
@@ -13,6 +14,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import service.ServiceFactory;
+import service.custom.CustomerService;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -76,7 +79,7 @@ public class CustomerFormController implements Initializable {
     @FXML
     private JFXTextField txtSalary;
 
-    CustomerService CustomerController = new CustomerController();
+    CustomerService1 CustomerController = new CustomerController1();
 
 
     @Override
@@ -135,12 +138,20 @@ public class CustomerFormController implements Initializable {
                 txtProvince.getText(),
                 txtPostalCode.getText()
         );
-        if(CustomerController.addCustomer(customer)){
-            new Alert(Alert.AlertType.INFORMATION,"Customer Added Successfully").show();
+
+        CustomerService service = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
+
+        if(service.addCustomer(customer)){
+            new Alert(Alert.AlertType.INFORMATION,"Customer Added...").show();
             loadTable();
-        } else {
-            new Alert(Alert.AlertType.ERROR,"Customer Not Added").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Customer Not Added...").show();
+
         }
+
+
+
+
     }
 
     @FXML

@@ -1,4 +1,4 @@
-package Model;
+package dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class OrderDetail {
     private String orderID;
     private  String itemCode;

@@ -1,7 +1,7 @@
 package Controller.Item;
 
-import Model.Item;
-import Model.OrderDetail;
+import dto.Item;
+import dto.OrderDetail;
 import Util.CRUDUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,24 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ItemController implements ItemService{
+public class ItemController1 implements ItemService1 {
 
 
     @Override
     public boolean addItem(Item item) {
-        String SQL = "INSERT INTO Item VALUES(?,?,?,?,?)";
-        try {
-            return CRUDUtil.execute(
-                    SQL,
-                    item.getItemCode(),
-                    item.getDescription(),
-                    item.getPackSize(),
-                    item.getUnitPrice(),
-                    item.getQty()
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return false;
     }
 
     @Override
