@@ -22,17 +22,26 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public boolean updateCustomer(Customer customer) {
-        return false;
+        System.out.println("Update :"+customer);
+        CustomerDao customerDao = DaoFactory.getInstance().getDaoType(DaoType.CUSTOMER);
+        CustomerEntity entity = new ModelMapper().map(customer, CustomerEntity.class);
+        return customerDao.update(entity, customer.getId());
     }
 
     @Override
     public Customer searchCustomer(String id) {
-        return null;
+        System.out.println("Search :"+id);
+        CustomerDao customerDao = DaoFactory.getInstance().getDaoType(DaoType.CUSTOMER);
+        //CustomerEntity entity = new ModelMapper().map(customer, CustomerEntity.class);
+        return customerDao.search(id);
     }
 
     @Override
-    public boolean deleteCustomer(String id) {
-        return false;
+    public boolean deleteCustomer(String id ) {
+        System.out.println("Delete :"+id);
+        CustomerDao customerDao = DaoFactory.getInstance().getDaoType(DaoType.CUSTOMER);
+        //CustomerEntity entity = new ModelMapper().map(customer, CustomerEntity.class);
+        return customerDao.delete(id);
     }
 
     @Override

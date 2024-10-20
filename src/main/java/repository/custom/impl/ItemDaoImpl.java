@@ -1,6 +1,7 @@
 package repository.custom.impl;
 
 import Util.CRUDUtil;
+import dto.Customer;
 import entity.ItemEntity;
 import repository.custom.ItemDao;
 
@@ -36,6 +37,11 @@ public class ItemDaoImpl implements ItemDao {
     @Override
     public boolean delete(String s) {
         return false;
+    }
+
+    @Override
+    public Customer search(String s) {
+        return null;
     }
 
     @Override
