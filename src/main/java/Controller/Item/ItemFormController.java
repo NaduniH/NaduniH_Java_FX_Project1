@@ -79,7 +79,9 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        if(ItemController.deleteItem(txtItemCode.getText())){
+        ItemService itemService = ServiceFactory.getInstance().getServiceType(ServiceType.ITEM);
+
+        if(itemService.deleteItem(txtItemCode.getText())){
             new Alert(Alert.AlertType.INFORMATION,"Item Deleted!!").show();
             loadTable();
             //clearText();
@@ -90,7 +92,8 @@ public class ItemFormController implements Initializable {
 
     @FXML
     void btnSearchOnAction(ActionEvent event) {
-        Item item = ItemController.searchItem(txtItemCode.getText());
+        ItemService itemService = ServiceFactory.getInstance().getServiceType(ServiceType.ITEM);
+        Item item = itemService.searchItem(txtItemCode.getText());
         setValueToText(item);
     }
 
@@ -103,12 +106,14 @@ public class ItemFormController implements Initializable {
                 Double.parseDouble(txtUnitPrice.getText()),
                 Integer.parseInt(txtQty.getText())
         );
-        if(ItemController.updateItem(item)){
-            new Alert(Alert.AlertType.INFORMATION,"Item Updated!!").show();
+        ItemService itemService = ServiceFactory.getInstance().getServiceType(ServiceType.ITEM);
+
+        if(itemService.updateItem(item)){
+            new Alert(Alert.AlertType.INFORMATION,"Item Updated..").show();
             loadTable();
             //clearText();
         } else{
-            new Alert(Alert.AlertType.ERROR,"Item Not Updated!!").show();
+            new Alert(Alert.AlertType.ERROR,"Item Not Updated...").show();
         }
     }
 

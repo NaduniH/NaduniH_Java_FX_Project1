@@ -149,18 +149,20 @@ public class CustomerFormController implements Initializable {
 
         }
 
-
-
-
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        if(CustomerController.deleteCustomer(txtCusID.getText())){
-            new Alert(Alert.AlertType.INFORMATION,"Deleted Successfully!!").show();
+
+        CustomerService service = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
+
+        if(service.deleteCustomer(txtCusID.getText())){
+            new Alert(Alert.AlertType.INFORMATION,"Deleted Successfully...").show();
             loadTable();
+
+
         } else {
-            new Alert(Alert.AlertType.ERROR,"Not Deleted!!").show();
+            new Alert(Alert.AlertType.ERROR,"Not Deleted...").show();
         }
 
     }
@@ -168,7 +170,8 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void btnSearchOnAction(ActionEvent event) {
-        setValueToText(CustomerController.searchCustomer(txtCusID.getText()));
+        CustomerService service = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
+        setValueToText(service.searchCustomer(txtCusID.getText()));
     }
 
     @FXML
@@ -185,12 +188,15 @@ public class CustomerFormController implements Initializable {
                 txtPostalCode.getText()
 
         );
-        if(CustomerController.updateCustomer(customer)){
-            new Alert(Alert.AlertType.INFORMATION,"Update Successfully!!").show();
+
+        CustomerService service = ServiceFactory.getInstance().getServiceType(ServiceType.CUSTOMER);
+
+        if(service.updateCustomer(customer)){
+            new Alert(Alert.AlertType.INFORMATION,"Update Successfully...").show();
             loadTable();
 
         } else{
-            new Alert(Alert.AlertType.ERROR,"Customer Not Updated!!").show();
+            new Alert(Alert.AlertType.ERROR,"Customer Not Updated...").show();
         }
     }
 

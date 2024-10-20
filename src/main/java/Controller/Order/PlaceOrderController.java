@@ -115,8 +115,6 @@ public class PlaceOrderController implements Initializable {
     void btnPlaceOrderOnAction(ActionEvent event) {
         String orderID = txtCustomerID.getText();
         String customerId = cmbCustomerId.getValue();
-        //String orderDate = lblOrderDate.getText();
-
         LocalDate now = LocalDate.now();
         ArrayList<OrderDetail>orderDetails = new ArrayList<>();
 
