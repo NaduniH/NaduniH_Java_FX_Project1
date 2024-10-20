@@ -4,7 +4,6 @@ import Util.CRUDUtil;
 import dto.Customer;
 import entity.CustomerEntity;
 import repository.custom.CustomerDao;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -71,7 +70,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public Customer search(String id) {
+    public Object search(String id) {
         String SQL = "SELECT * FROM Customer WHERE CustID=?";
         ResultSet resultSet = null;
         try {

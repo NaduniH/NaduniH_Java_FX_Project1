@@ -6,7 +6,6 @@ import entity.CustomerEntity;
 import javafx.collections.ObservableList;
 import org.modelmapper.ModelMapper;
 import repository.DaoFactory;
-import repository.SuperDao;
 import repository.custom.CustomerDao;
 import service.custom.CustomerService;
 
@@ -32,15 +31,13 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer searchCustomer(String id) {
         System.out.println("Search :"+id);
         CustomerDao customerDao = DaoFactory.getInstance().getDaoType(DaoType.CUSTOMER);
-        //CustomerEntity entity = new ModelMapper().map(customer, CustomerEntity.class);
-        return customerDao.search(id);
+        return (Customer) customerDao.search(id);
     }
 
     @Override
     public boolean deleteCustomer(String id ) {
         System.out.println("Delete :"+id);
         CustomerDao customerDao = DaoFactory.getInstance().getDaoType(DaoType.CUSTOMER);
-        //CustomerEntity entity = new ModelMapper().map(customer, CustomerEntity.class);
         return customerDao.delete(id);
     }
 

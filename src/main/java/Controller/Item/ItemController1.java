@@ -19,47 +19,17 @@ public class ItemController1 implements ItemService1 {
 
     @Override
     public boolean updateItem(Item item) {
-        String SQL = "UPDATE Item SET Description=?,PackSize=?,UnitPrice=?,QtyOnHand=? WHERE ItemCode=?";
-        try {
-            return CRUDUtil.execute(
-                    SQL,
-                    item.getDescription(),
-                    item.getPackSize(),
-                    item.getUnitPrice(),
-                    item.getQty(),
-                    item.getItemCode());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return false;
     }
 
     @Override
     public Item searchItem(String itemCode) {
-        String SQL = "SELECT * FROM Item WHERE ItemCode=?";
-        ResultSet resultSet = null;
-        try {
-            resultSet = CRUDUtil.execute(SQL, itemCode);
-            resultSet.next();
-            return new Item(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getDouble(4),
-                    resultSet.getInt(5)
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return null;
     }
 
     @Override
     public boolean deleteItem(String itemCode) {
-        String SQL = "DELETE FROM Item WHERE ItemCode=?";
-        try {
-            return CRUDUtil.execute(SQL,itemCode);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        return false;
     }
 
     @Override
